@@ -57,37 +57,38 @@ submitButton.addEventListener('click', function() {
     item.value = "";
 })
     function addItemToIncompleteTable(ToDoItem) {
-    let NewRow = document.createElement('tr');
-    let descriptionTag = document.createElement('td');
-    descriptionTag.textContent = ToDoItem;
-    NewRow.appendChild(descriptionTag);
-    let actionTag = document.createElement('td');
-    let action = document.createElement('button');
-    action.textContent = "Mark complete";
-    action.addEventListener('click',function(){
-        NewRow.remove();
-        addItemToIncompleteTable(ToDoItem)
-    })
-        actionTag.appendChild(action);
-    NewRow.appendChild(action);
-    incomplete.appendChild(NewRow)
+        addItemToTable(ToDoItem, false)
     }
     function addItemToCompleteTable(ToDoItem) {
+        addItemToTable(ToDoItem, true)
+    }
+
+    function addItemToTable(ToDoItem, isComplete) {
         let NewRow = document.createElement('tr');
         let descriptionTag = document.createElement('td');
         descriptionTag.textContent = ToDoItem;
         NewRow.appendChild(descriptionTag);
         let actionTag = document.createElement('td');
         let action = document.createElement('button');
-        action.textContent = "Mark complete";
-        action.addEventListener('click',function(){
-            NewRow.remove();
-            addItemToCompleteTable(ToDoItem)
-        })
         actionTag.appendChild(action);
         NewRow.appendChild(action);
-        Complete.appendChild(NewRow)
+        if (isComplete){
+            action.textContent = "Mark incomplete";
+            action.addEventListener('click',function(){
+                NewRow.remove();
+                addItemToIncompleteTable(ToDoItem)
+            })
+            Complete.appendChild(NewRow)
+        } else {
+            action.textContent = "Mark complete";
+            action.addEventListener('click',function(){
+                NewRow.remove();
+                addItemToCompleteTable(ToDoItem)
+            })
+            incomplete.appendChild(NewRow)
+        }
     }
+
 </script>
 </body>
 </html>
