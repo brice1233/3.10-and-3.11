@@ -1,53 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>timer</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Timers</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-  <div class="content">
-    <button id="trigger">CLick me</button>
-      <button id="interval">repeat</button>
-      <button id="cancel">cancel repeat</button>
-  </div>
+<div class="content">
+<button id="trigger">Click me!</button>
+<button id="interval">Repeat</button>
+<button id="cancel">Cancel Repeat</button>
 </div>
-
+</div>
+ 
 <script>
-    const myButton = document.getElementById('trigger')
-    const repeatButton = document.getElementById('interval');
-    const cancelButton = document.getElementById('cancel');
-    const colorList = ['blue', 'green','red','pink','yellow']
-    let interval;
-
-    myButton.addEventListener('click', function () {
-        //this will happen in 1000ms, or 1 second
-        setTimeout(function() {
-            console.log('i was clicked 1 second ago.')
+const myButton = document.getElementById("trigger");
+const repeatButton = document.getElementById("interval");
+const cancelButton = document.getElementById("cancel");
+let interval;
+ 
+myButton.addEventListener('click', function(){
+    //This will happen in 1000ms, or 1 second
+    setTimeout(function (){
+        console.log("I was clicked one second ago.")
+    }, 1000);
+ 
+    //Not in a timeout, so does not wait
+    console.log("Happens right away");
+})
+repeatButton.addEventListener('click', function(){
+    if (!interval){
+        interval = setInterval(function(){
+            console.log("I happen every second.")
         }, 1000);
-
-        //not in a timeout, so does not wait
-        console.log('Happens right away');
-    })
-
-    repeatButton.addEventListener('click', function () {
-       if(!interval){
-        interval = setInterval(function () {
-         console.log('i happen every 5 seconds.')
-           }, 5000);
-       }
-    });
-
-    cancelButton.addEventListener('click',function (){
-        if(interval){
-            clearInterval(interval);
-            interval = null;
-        }
-    })
-
-
-
+    }
+});
+ 
+cancelButton.addEventListener('click', function(){
+    if (interval){
+        clearInterval(interval);
+        interval = null;
+    }
+})
 </script>
 </body>
 </html>
